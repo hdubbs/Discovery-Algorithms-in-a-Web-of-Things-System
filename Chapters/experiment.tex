@@ -114,8 +114,33 @@ Lastly a data type for the connected graphs (\texttt{ConnectedGraph}) was create
 
 We started by implementing the the pseudocode as it was likely intended to be implemented: one graph was processed and searched for redundant subgraphs. As discrepancies came up in the implementation, we reached out to the author, but since the paper was so old (2005), the author no longer had any code and expressed that she neither had the "time, nor the interest" in discussing the algorithm further. So left to our own devices, we rebuilt the algorithm, as we thought was intended and verified using unit testing.
 
-Once the REDD algorithm was implemented as it was in most likely intened in Espoisto's paper, we changed the graph mappings function, to run queries between to graphs, $G_1$ and $G_2$. Finally, this algorithm could be used to update graphs in the centralized discovery algorithm.
+For the tests we created sample data using the Turtle format. like the below, which contains 6 triples and 3 connecte subgraphs. We then tested the \texttt{buildBlankNodeConnectedGraphs} function, by checking that number of blank node connected graphs were correct. This is done in listing \ref{blankNodeJUNIT}.
 
+\begin{lstlisting}[caption={Some sample data that we created for unit testing, written in Turtle.}]
+@prefix person: <http://example.com/person/fake/>
+
+person:adam		<p>		_:b3 .
+_:b3			<p>		_:b4 .
+person:adam		<p>		_:b1 .
+_:b1			<p>		_:b2 .
+_:b2			<p>		person:bertold .
+person:bertold	<p>		_:b5 .
+\end{lstlisting}
+
+Listing \ref{blankNodeJUNIT} shows the basic setup of a JUnit Test. The test is marked with the 
+
+\begin{lstlisting}[language=JAVA, caption={A very trivial test, that checks the correct number of connected graphs in a sample graph is three.}, label={blankNodeJUNIT}]
+@Test
+public void buildConnGraphsTest() {
+  GraphLean tester = new GraphLean();
+
+  Model m = createSampleModel("sample.ttl");
+  Collection<ConnectedGraph> graphs = tester.buildBlankNodeConnectedGraphs(m);
+  assertEquals("Number of Conn Graphs must be 3", 3, tester.buildBlankNodeConnectedGraphs(m).size());
+}
+\end{lstlisting}
+
+Once the REDD algorithm was implemented as it was in most likely intended in Espoisto's paper, we changed the graph mappings function, to run queries between two graphs: $G_1$ and $G_2$. Finally, this algorithm could be used to update graphs in the centralized discovery algorithm.
 
 \subsection{The Centralized Discovery}
 
