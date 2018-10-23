@@ -127,9 +127,9 @@ _:b2			<p>		person:bertold .
 person:bertold	<p>		_:b5 .
 \end{lstlisting}
 
-Listing \ref{blankNodeJUNIT} shows the basic setup of a JUnit Test. The test is marked with the 
+Listing \ref{blankNodeJUNIT} shows the basic setup of a JUnit Test. The test is marked with a \texttt{@Test} tag before the function declaration. Then an instance of the class to be tested is created. A function was implemented to convert sample Turtle RDF graphs into Jena Models and then the function \texttt{buildBlankNodeConnectedGraphs} was run using the sample model. The actual test is in the last line, where \texttt{assertEquals} checks that the number of connected graphs created by the method is indeed three.
 
-\begin{lstlisting}[language=JAVA, caption={A very trivial test, that checks the correct number of connected graphs in a sample graph is three.}, label={blankNodeJUNIT}]
+\begin{lstlisting}[language=JAVA, caption={A very trivial test, that checks the correct number of connected graphs in a sample graph is correct for the sample data, in this case sample.ttl contains 3 connected subgraphs.}, label={blankNodeJUNIT}]
 @Test
 public void buildConnGraphsTest() {
   GraphLean tester = new GraphLean();
@@ -138,6 +138,25 @@ public void buildConnGraphsTest() {
   Collection<ConnectedGraph> graphs = tester.buildBlankNodeConnectedGraphs(m);
   assertEquals("Number of Conn Graphs must be 3", 3, tester.buildBlankNodeConnectedGraphs(m).size());
 }
+\end{lstlisting}
+
+This test was run multiple times using different dummy data and each time it worked, so after that the next methods were written. We then moved on to checking if graphs containing blank nodes could be queried without failure.
+
+
+\begin{lstlisting}[language=JAVA, caption={This test checks if a model containign blank nodes can be queried without returning an error.}]
+@Test
+	public void blankModelExecutionTest() {
+		GraphLean tester = new GraphLean();
+		Model m = createSampleModel("sample4.ttl"); // contains no blank nodes
+		ConnectedGraph connGraph = new ConnectedGraph(m);
+		Model mQueried = createSampleModel("sample5.ttl"); // contains blanks
+		Query q = connGraph.asQuery();
+		HashSet<QuerySolution> solutions = tester.executeQuery(mQueried, q);
+
+		assertTrue("No solutions found", solutions.size() == 0); // don't expect
+																	// to get
+																	// answers
+	}
 \end{lstlisting}
 
 Once the REDD algorithm was implemented as it was in most likely intended in Espoisto's paper, we changed the graph mappings function, to run queries between two graphs: $G_1$ and $G_2$. Finally, this algorithm could be used to update graphs in the centralized discovery algorithm.
