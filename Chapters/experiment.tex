@@ -153,9 +153,7 @@ This test was run multiple times using different dummy data and each time it wor
 		Query q = connGraph.asQuery();
 		HashSet<QuerySolution> solutions = tester.executeQuery(mQueried, q);
 
-		assertTrue("No solutions found", solutions.size() == 0); // don't expect
-																	// to get
-																	// answers
+		assertTrue("No solutions found", solutions.size() == 0); // no solutions expected
 	}
 \end{lstlisting}
 
