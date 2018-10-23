@@ -1,0 +1,19 @@
+@prefix rdf:       <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix qudt:      <http://qudt.org/schema/qudt#> .
+@prefix quantity:  <http://qudt.org/vocab/quantity#> .
+@prefix unit:      <http://qudt.org/vocab/unit#> .
+@prefix eco:       <http://www.eclass.eu/#> .
+@prefix gr:        <http://purl.org/goodrelations/v1#>.
+@prefix wot:       <http://w3c.github.io/wot/wot.owl#> .
+@prefix demo:      <http://siemens.com/urdf/ns#> .
+
+<http://tank1> a eco:C_ACH632010-gen ;
+            demo:embeds _:levelsensor .
+
+_:levelsensor a eco:C_AGZ259007-gen ;
+              wot:hasProperty _:level .
+
+_:level a qudt:Quantity ;
+        wot:hasInteraction <coap://192.168.2.61:5683/levelvalue> ;
+        qudt:hasQuantityKind quantity:Volume ;
+        qudt:unit unit:CubicMeter .

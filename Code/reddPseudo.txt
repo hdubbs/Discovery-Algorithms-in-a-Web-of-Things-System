@@ -1,0 +1,66 @@
+Set<RDFNodePair> graphMappings(Model m1, Model m2) {
+    Set<RDFNodePair> redundancies;
+    // m1 against m2
+    Set<ConnectedGraph> cg1 = buildBlankNodeConnectedGraphs(m1);
+    for each ConnectedGraph graph in cg1 {
+    	Query q = graph.asQuery();
+    	for each QuerySolution qs in executeQuery(m2, q) {
+          add all results in qs to redundancies
+          redundancies.add (all resultant variables from qs)
+    	}
+    }
+}
+
+	Repeat the above block with m1 and m2 swapped
+
+	return redundancies;
+}
+
+
+Set<ConnectedGraph> buildBlankNodeConnectedGraphs(Model m) {
+	Map<RDFNode, Model> blanksTocg;
+	Set<ConnectedGraph> cg;
+    
+    for each statement, s, in m {
+		if (s.Subject is blank) {
+			Model g;
+			subj = s.getSubject();
+			if (!blanksTocg.containsKey(subj)) {
+                initialze an empty model for g
+				cg.add(new ConnectedGraph(g));
+				blanksTocg.put(subj, g);
+			} else {
+				g = blanksTocg.get(subj);
+			}
+			g.add(s);
+        }
+		if (s.Object is blank) {
+			if (blanksTocg.containsKey(s.Object)) {
+				Model subgraph = blanksTocg.get(s.Object);
+				cg.remove(new ConnectedGraph(subgraph));
+				g.add(subgraph);
+            }
+			blanksTocg.put(s.Object , g);
+		}
+		} else if (s.Object is blank) {
+			Model g;
+			RDFNode obj = s.Object;
+			if (!blanksTocg.containsKey(obj)) {
+				Initialize g as a new Model
+				cg.add(new ConnectedGraph(g));
+					blanksTocg.put(obj, g);
+				} else {
+					g = blanksTocg.get(obj);
+				}
+				g.add(s);
+			}
+		}
+	return cg;
+}
+	
+HashSet<QuerySolution> executeQuery(Model m, Query q) {
+	HashSet<QuerySolution> redundancies;
+    results = EXECUTEQUERY(q, m);
+    redundancies.add (all solutions in result set);
+	return redundancies;
+}

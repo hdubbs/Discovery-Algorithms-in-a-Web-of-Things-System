@@ -1,0 +1,70 @@
+\chapter{Introduction}
+
+%o Introduction ~ 2-4 Pages
+%    - Motivation // why your proj with WoT is important, not why WoT is important, Haneberg >> Oder doch?
+%    - Brief explanation of the term IoT
+%    - Difference between IoT and WoT // WoT is from the ETHZ
+%      o Explain WoT, Motivation
+%    - Scope of thesis
+
+%Here is a problem: IoT doesn't work like we want it to
+%It's an interesting problem
+%It's an unsolved problem
+
+% Note: CT doesn't have a plan for WoT they're just exploringcd ..
+
+% What idea did this paper convey?
+% You're describing the context here
+
+The \textit{Internet of Things} (IoT) is one of the most ubiquitous topics in technology today. Computational power has never been so cheap and hardware has never been so specialized. \change{I don't know that this expresses what I want} Industries are scurrying to find use cases for the IoT to stay ahead of their competitors and economically, it shows: the IoT is already itself a lucrative industry. According to a survey done by the consulting firm PwC over 6 Trillion US-Dollars will be spent globally on IoT Solutions between 2015 and 2020.\cite{pwcIoT} --that represents almost twice the annual GDP of Germany. \change{citation needed, maybe CIA Factbook} But, the IoT is hobbled by the lack of interoperability between platforms.
+
+
+The potential of the Internet of Things (IoT) is enormous, but is hampered by the multitude of disjointed, domain-specific IoT platforms.
+
+Two former doctoral students at the ETH Zurich saw this limitation and proposed the \textit{Web of Things} (WoT). The WoT is to the IoT as the Web to the Internet. That is to say, the IoT is an infrastructure change and the WoT is an abstraction of the IoT, which is not concerned with lower level tasks. The goal of the WoT is to be capable of connecting each Thing to another.
+
+It is difficult to precisely define the IoT--as a buzzword it is understood differently by different groups. Here the term IoT is an umbrella expression for the interconnection of smart devices. This includes sensors, actuators, RFID devices, and smartphones. \cite{Guinard2016} It is the marriage of the physical and virtual, which strives to improve quality of life.
+
+%There are many IoT Platforms currently on the market: Amazon AWS IoT, Google IoT and IBM Watson IoT are some of the most popular. They fail to solve interoperability issues, because devices on one platform cannot always work with a device working on another platform. A more accurate term for the current state of the IoT is the \textit{Intranet of Things}, since these platforms were simply not designed for massive heterogeneous networks. \cite{Guinard2016} It would be lovely, if any device could be easily integrated and used by any application--this is exactly what the \textit{Web of Things} (WoT) hopes to achieve.
+%Insert a picture of various protocols, and WoT abstraction, make your own, since probably that graphic is quite informal
+
+
+\section{The Need for the WoT}
+
+\change{sounds stupid}If the IoT is in its adolescence, than the WoT is in its infancy. Two doctoral students at the ETH Zürich coined the term in 2011 when they saw interoperability challenges facing the IoT. They believed a single universal application layer was necessary in order for IoT to be realized. This allows devices and services to communicate without taking their physical connection into consideration. \cite{Guinard2016} It is a step toward the moonshot dream, that each device and service be accessible to every other device or service.
+
+\change{more semantic web in the introduction}
+
+\section{Motivation}
+
+The city of Musterberg is planning a cutting-edge water reclamation facility. It should be fully automated and connected to the Internet, so that the process can be monitored from afar. This means each sensor and actuator needs a digital representation and a microcontroller, with which data can be processed. The city council hires a chemical engineer, Tricia, who must install and configure thousands of sensors and actuators. With current technology Tricia would have to configure each device separately. That means, she has to tell them, who they "talk" to, what their responsibility is, and what physical units they are working with.
+
+With current technologies it will require several years of manpower to set up this network. How can this type of configuration be accelerated? How can an object be digitally represented, so that an object knows its purpose? How can relevant and meaningful partners be found for each device? The focus of this work is to present two possible solution to the first question and to examine the work being done to answer the others.
+
+\begin{comment}
+
+\subsection{Business Cases}
+Consider a global pharmaceutical company, which would like to build a state-of-the-art factory abroad. They would like to equip each sensor and actuator on the production line with microcontrollers, so that each step of production can be electronically monitored. At present each microcontroller must be manually configured for the factory, which can require take several engineers several years, during which the company fails to profit. In order to save precious time, the company may choose to use existing platforms such as the Amazon AWS IoT. But this still requires each individual microcontroller to have the SDK available on it, so that the device can communicate with the device manager. Two possible solutions using Web of Things technology will be evaluated in this thesis.
+
+
+Most of current IoT projects use devices, which were neither intended to be easily reprogrammable nor intended to be used in multiple domains. \cite{Guinard2016} Instead they rely on cloud-based rule engines to analyze data and add functionality. Many projects such as the Nest smart home system require users to purchase proprietary hardware. This is good for short-term profit margins, but bad for the long-term evolution of the IoT. Enter the \textit{Web of Things} (WoT). The WoT is intended to refine the IoT by using existing web technology to integrate devices into the web and thereby open the IoT to a wider group of developers.
+
+
+
+
+\end{comment}
+
+\section{Scope of this Thesis}
+Researchers at Siemens and other entities are exploring the limitations of the WoT standardizing this technology. %Some more context use Siemens WoT PUBLIC website as a source
+\change{turn to prose}
+This work will examine:
+
+\begin{itemize}
+  \item the hardware and software used,
+  \item Semantic Web technology concepts,
+  \item Implement and test an algorithm to remove redundant nodes in an RDF graph
+  \item Implement and Test a centralized exchange of Thing Descriptions
+  \item Implement and test a distributed discovery algorithm
+  \item Results of the tests on the FESTO demonstrator
+  \item comparisons between the different algorithms using a simulation.
+\end{itemize}

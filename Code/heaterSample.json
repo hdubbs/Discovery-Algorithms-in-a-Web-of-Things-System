@@ -1,0 +1,32 @@
+{
+    "@context": [
+        "http://w3c.github.io/wot/w3c-wot-td-context.jsonld"
+    ],
+    "@type": "Thing",
+    "name": "Heater",
+    "uris": ["coap://w3cwot.sytes.net:5685/Heater"],
+    "encodings": ["JSON"],
+    "properties": [{
+        "name": "Status",
+        "valueType": {"type": "string"},
+        "writable": false,
+        "hrefs": ["status"]
+    }],
+    "actions": [
+        {
+            "name": "On",
+            "inputData": {"valueType": {"type": "boolean"}},
+            "hrefs": ["on"]
+        },
+        {
+            "name": "Off",
+            "inputData": {"valueType": {"type": "boolean"}},
+            "hrefs": ["off"]
+        }
+    ],
+    "events": [{
+        "name": "criticalCondition",
+        "inputData": {"valueType": {"type": "string"}},
+        "hrefs": ["criticalCondition"]
+    }]
+}

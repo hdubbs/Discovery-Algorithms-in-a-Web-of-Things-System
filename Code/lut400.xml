@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:demo="http://siemens.com/urdf/ns#"
+   xmlns:qudt="http://qudt.org/schema/qudt#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:wot="http://w3c.github.io/wot/wot.owl#"
+>
+  <rdf:Description rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b1">
+    <wot:hasProperty rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b2"/>
+    <rdf:type rdf:resource="http://www.eclass.eu/#C_AGZ259007-gen"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b2">
+    <wot:hasInteraction rdf:resource="coap://192.168.2.61:5683/levelvalue"/>
+    <qudt:unit rdf:resource="http://qudt.org/vocab/unit#CubicMeter"/>
+    <qudt:hasQuantityKind rdf:resource="http://qudt.org/vocab/quantity#Volume"/>
+    <rdf:type rdf:resource="http://qudt.org/schema/qudt#Quantity"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://tank1">
+    <rdf:type rdf:resource="http://www.eclass.eu/#C_ACH632010-gen"/>
+    <demo:embeds rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b1"/>
+  </rdf:Description>
+</rdf:RDF>
