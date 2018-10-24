@@ -157,7 +157,53 @@ This test was run multiple times using different dummy data and each time it wor
 	}
 \end{lstlisting}
 
-Once the REDD algorithm was implemented as it was in most likely intended in Espoisto's paper, we changed the graph mappings function, to run queries between two graphs: $G_1$ and $G_2$. Finally, this algorithm could be used to update graphs in the centralized discovery algorithm.
+Once the REDD algorithm was implemented as it was \textit{most likely} intended in Espoisto's paper, we changed the graph mappings function, to run queries between two graphs: $G_1$ and $G_2$. Finally, this algorithm could be used to update graphs in the centralized discovery algorithm. Each step of the way we ran tests to ensure the algorithm was still functioning correctly.
+
+Our final test took all three NodeMCUs and created the lean subgraph in the network, that all of the NodeMCUs should have. Since this test seen in \ref{lst:coreJUNIT} and all others came back correctly, we continued on to implement the centralized discovery algorithm.
+
+\begin{lstlisting}[language=java, caption={The final test, which checked that the semantic data was being connected, as previously expected.}, label={lst:coreJUNIT}]
+@Test
+public void findRedundanciesInGraphsTest() {
+  GraphLean tester = new GraphLean();
+
+  Model actuators = createSampleModel("actuators.ttl");
+  Model lut400 = createSampleModel("lut400.ttl");
+  Model pmag = createSampleModel("pmag.ttl");
+
+  Model merged = ModelFactory.createDefaultModel();
+
+  Set<RDFNodePair> redundancies;
+
+  redundancies = tester.graphMappings(actuators, pmag);
+  redundancies.addAll(tester.graphMappings(pmag, lut400));
+  redundancies.addAll(tester.graphMappings(actuators, lut400));
+
+  merged.add(actuators);
+  merged.add(pmag);
+  merged.add(lut400);
+
+  List<Statement> toRemove = new ArrayList<>();
+  StmtIterator it = merged.listStatements();
+  while (it.hasNext()) {
+    Statement st = it.next();
+    for (RDFNodePair p : redundancies) {
+      RDFNode[] array = p.get();
+      // take blank node in pair
+      RDFNode n = array[0].isAnon() ? array[0] : array[1];
+      if (n.equals(st.getSubject()) || n.equals(st.getObject())) {
+        toRemove.add(st);
+      }
+    }
+  }
+  merged.remove(toRemove);
+
+  Model systemcore = createSampleModel("system-core.ttl");
+
+  assertTrue("Merged Graphs should equal syscore", merged.isIsomorphicWith(systemcore));
+}
+\end{lstlisting}
+
+
 
 \subsection{The Centralized Discovery}
 
