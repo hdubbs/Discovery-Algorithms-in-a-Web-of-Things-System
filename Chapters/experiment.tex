@@ -216,7 +216,13 @@ Each iteration of the centralized discovery can be broken down into two steps: (
 
 The centralized algorithm was implemented by using psuedocode and implementing the code, again using Apache Jena. The implementation of the centralized discovery was straight forward and did not require much testing. The only unit testing that was done checked if all three devices had the same core graph when the discovery algorithm finished running. When this test passed, the benchmarks were run.
 
-\change{add uml diagram, love}
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Figures/centralizedUML.png}
+\caption{The Centralized Discovery as implemented.}
+\end{figure}
 
 
 \change{add activity diagram, maybe in theory part?}
@@ -231,7 +237,7 @@ Between each iteration the times were recorded in a table. To assess whether the
 
 \lstinputlisting[frame=single, caption={The Centralized Discovery Benchmark}, label={lst:centralizedBenchmark}, language=Java, tabsize=2, breaklines=true]{Code/centralizedBenchmark.java}
 
-As is clear, the centralized discovery algorithm requires linear storage.
+As is clear, the centralized discovery algorithm requires linear storage, this allows
 
 \subsubsection{Results}
 The primary goal of this work was to prove that the centralized discovery algorithm would work--not to create an optimal algorithm. Unit testing verified that this is in fact a viable way of exchanging data on a WoT network.
