@@ -25,7 +25,7 @@ Experts distinguish between two types of interoperability: vertical and horizont
 \label{fig:wangIntegration}
 \end{figure}
 
-The ultimate goal of the WoT is total horizontal interoperability between different and arbitrarily many domains. By "translating" existing domain standards into machine readable formats instead creating new standards Things can be connected across and within domains\cite{MichahellesWoS}. This combined with Industry 4.0 would mean an exhaustive data exchange between all members of a product's supply chain referred to as \textit{end-to-end} interoperability. This would make products and their respective qualities easily reproducible\cite{wang2016implementing}, thus aiding quality control especially with regards to finding the causes production flaws.
+The ultimate goal of the WoT is seamless interoperability in both directions, especially horizontal, e.g. between arbitrarily different domains. By "translating" existing domain standards into machine readable formats instead creating new standards, Things can be connected across and within domains\cite{MichahellesWoS}. Seamless interoperability combined with Industry 4.0 would allow an exhaustive data exchange between all links in a product's supply chain; this is referred to as \textit{end-to-end} interoperability. It would make products and their respective qualities easily reproducible\cite{wang2016implementing}, thus aiding quality control/assurance especially with regards to finding the causes production flaws.
 
 In the example with Tricia and the water reclamation facility, Tricia is charged with designing a system that has vertical interoperability, because she wants to create an integrated smart factory. In an extension of this example, horizontal interoperability would be useful for the integration of the municipal power grid. Let's suppose the reclamation facility has two main power sources aside from the municipal power grid: solar panels and the ability to generate electricity from the decomposing solid waste, raked off before the black water\footnote{waste-water that contains fecal matter.} is processed. It would be useful for the facility to feed power into the gird if there is an abundance of power being generated. Likewise it would help the facility to take advantage of low energy costs, when the municipal grid has a power abundance. As renewable power sources with a stochastic nature, such as wind turbines or solar cells, become more prevalent, this will be more useful, especially since at this scale electricity cannot be effectively stored. Tricia knows this, because she paid attention in her electrical engineering class and is therefore eager to get her plant horizontally integrated.
 
@@ -33,7 +33,7 @@ In the example with Tricia and the water reclamation facility, Tricia is charged
 
 
 \section{The Semantic Web}
-For the creators of the Web of Things, Dominique D. Guinard and Vlad M. Trifa, it was vital to reuse proven technology to build an architecture for the WoT, rather than develop yet another standard. Guinard and Trifa hoped this would reduce the number of competing standards, thus accelerate the WoT's development. \cite{Guinard.2016} 
+For the creators of the Web of Things, Dominique D. Guinard and Vlad M. Trifa, it was vital to reuse proven technology to build an architecture for the WoT, rather than develop yet another standard. Guinard and Trifa hoped this would reduce the number of competing standards, thus accelerate the WoT's development. \cite{Guinard.2016}
 
 The cornerstone of the WoT is the Semantic Web. In the way the Web allows users to easily access documents, so should the Semantic Web allow machines to access data. This is the foundation for machine-to-machine (M2M) communication. In May 2001 Tim Berners Lee first openly discussed the Semantic Web in the \textit{Scientific American}. Its purpose was to extend the Web, so that the information found in it can be easily understood by computers for higher level tasks. Lee proposed an extension to the Web, that was decidedly data-centric for machine consumption, to accompany the document-rich Web for humans. At the time he identified three central components to the Semantic Web: XML, RDF, and ontologies. The first two will be discussed below, the last is a way to link two databases that may use different identifiers to connect the same concepts. For example, look at the zip code. Most US citizens will say ZIP code, elsewhere they may prefer postcode or postal code. How machines should understand that these concepts are all the same is tackled by ontologies. \cite{berners2001semantic}
 
@@ -66,14 +66,16 @@ The Thing Description (TD) is built upon W3C Semantic Web recommendations, speci
 
 
 One of these building blocks, the \textit{Thing Description} (TD) standardizes the representation of a Thing's semantic metadata and is analogous the \texttt{index.html} or the landing page of a website. It has not yet been recommended by the W3C, but has only been proposed as a first working draft on September 14, 2017. \cite{Kabisch.2017} \change{add 2018 citation}
-Thing Descriptions have been identified as the essential prerequisite for a device to take part in the WoT\cite{Kazuo.2017}. They contain information such as which protocols the Thing supports, which resources and services the Thing has, and where they are, their ids and also names. \change{change citation, TD recommendation}
+Thing Descriptions have been identified as the essential prerequisite for a device to take part in the WoT\cite{Kazuo.2017}. They contain information such as which protocols the Thing supports, which resources and services the Thing has, its geographic location, id, and name. \change{change citation, TD recommendation}
 
 
-TDs are serialized by default in JSON-LD, a variant of JavaScript Object Notation, and can either be hosted on the Thing itself or elsewhere, when required. Hosting elsewhere is notably practical when a Thing has limited resources or when legacy devices should be retrofitted to participate in a new WoT system. JSON-LD documents can be serialized in RDF documents due to the mappings between the keywords \texttt{hasThingDescription}, \texttt{hasInteraction}, and \texttt{hasProperty} and \texttt{uris}, \texttt{hrefs}, and \texttt{properties} respectively. The former are contextualized by \url{https://w3c.github.io/wot/w3c-wot-td-context.jsonld}. \change{this can be expanded, love}
+TDs are serialized by default in JSON-LD, a variant of JavaScript Object Notation, and can either be hosted on the Thing itself or elsewhere, when required. Hosting elsewhere is practical when a Thing has limited resources or when legacy devices should be retrofitted to participate in a new WoT system. JSON-LD documents can be serialized in RDF documents due to the mappings between the keywords \texttt{hasThingDescription}, \texttt{hasInteraction}, and \texttt{hasProperty} and \texttt{uris}, \texttt{hrefs}, and \texttt{properties} respectively. The former are contextualized by \url{https://w3c.github.io/wot/w3c-wot-td-context.jsonld}. \change{this can be expanded, love}
 
 
 
-Thing Descriptions can be extended by other RDF vocabularies.\cite{Kabisch.2017} In this work the ontology Quantity, Unit, and Data Types (QUDT) \change{this may be confusing, bc above you call it an ontology}\footnote{\url{http://qudt.org/}}, is used to describe the physical units measured like volume and temperature. The ontological model eCl@ssOWL\footnote{\url{http://heppnetz.de/projects/eclassowl/}} was used. ECl@ssOWL was generated from industrial standards and characterizes manufactured products. It enables not only the sensors and actuators to be described, but describes the other physical equipment the system entails. Specifically in the FESTO demonstrator this includes the water tanks and pipes. This work won't go into the details of the used ontologies, because it wasn't especially relevant its contributions and because of the complexity of the ontologies. Here the reader should just know that QUDT is a standard for expressing physical quantities, by standardizing units and ECl@ssOWL allows manufacturers to use\footnote{\uri{www.eclasscontent.com}} standardized metadata for their products. \change{maybe, citation instead of footnote, use sparingly}
+Thing Descriptions can be extended by other RDF vocabularies\cite{Kabisch.2017}. In this work the ontology Quantity, Unit, and Data Types (QUDT)\footnote{\url{http://qudt.org/}}, is used to describe the physical units measured by the sensors, like volume and temperature. The ontological model eCl@ssOWL\footnote{\url{http://heppnetz.de/projects/eclassowl/}} was also required. This ontology was generated from industrial standards and characterizes manufactured products. It enables not only the sensors and actuators to be described, but describes the other physical equipment the system entails. Specifically in the FESTO demonstrator this includes the water tanks and pipes.
+
+This work won't go into the details of the used ontologies, because it wasn't especially relevant its contributions and because of the complexity and contreversy surrounding ontologies. Here the reader should just know that there are standard ways to describe resources on the Semantic Web, called ontologies. QUDT is a standard for expressing physical quantities, by standardizing units and ECl@ssOWL allows manufacturers to use\footnote{\uri{www.eclasscontent.com}} standardized metadata for their products.
 
 
 \change{Add the TD of the LUT400 here, or snippit of it}
@@ -85,7 +87,7 @@ Please note, should the principle behind the TD change, this work assumes that a
 \section{The Resource Description Framework (RDF)}
 RDF was first recommended by the W3C on February 10, 2004. As the name implies RDF is a framework used to express information about resources. It serves as a data model to facilitate data exchange on the Web. Similarly to Things, resources include documents, various physical objects, people, or even abstract concepts. When information on the Web needs to be processed RDF can be used, since RDF provides a common framework.
 
-RDF provides a way to extend the linking function of the Web by providing the context of a relationship of a link, and not just a connection between its two ends. Therefore, RDF allows developers to make statements about Web resources. The format of which is a triple with the format \texttt{<subject> <predicate> <object>}. Just like a sentence in a natural language, statements express relationships between two entities, namely the \textbf{subject} and the \textbf{object}. The \textbf{predicate} indicates the nature of their relationship. Relationships are directional and told from the perspective of the subject to the object. A simple example is: \texttt{<Jane> <likes> <Richard> .} Recall that the relationship is directional; this means we know Jane likes Richard, but the triple does not imply that Richard likes Jane. We don’t know about the relationship between Dick and Jane from Richards perspective.
+RDF provides a way to extend the linking function of the Web by providing the context of a relationship of a link, and not just a connection between its two ends. Therefore, RDF allows developers to make statements about Web resources. The format of which is a triple with the format \texttt{<subject> <predicate> <object>}. Just like a sentence in a natural language, statements express relationships between two entities, namely the \textbf{subject} and the \textbf{object}. The \textbf{predicate} indicates the nature of their relationship. Relationships are directional and told from the perspective of the subject to the object. A simple example is: \texttt{<Jane> <likes> <Richard> .} Recall that the relationship is directional; this means we know Jane likes Richard, but the triple does not imply that Richard likes Jane.
 
 \begin{figure}[th]
 \centering
@@ -115,7 +117,7 @@ Just as sentences can grow in complexity, so can RDF data. It is therefore usefu
   \label{fig:lut400_n-triples}
 \end{figure}
 
-So it's clear how RDF data is connected, but not yet clear what the components of an RDF triple are. So what are subjects, objects, and predicates? How can we use them? A resource can be mentioned both as a subject and an object in numerous triples, though not reflexively, e.g. \texttt{<Donald Trump> <loves> <Donald Trump> .} is not allowed.  Subjects, predicates, and objects can be IRIs (Internationalized Resource Identifiers), whereas subjects and objects may be \textit{blank} nodes (more about those in \ref{sec:blanknodes}). Objects may additionally be \textit{literals}, which are used for static values entailing strings, numbers, or dates. Blank nodes, IRIs, and literals are so-called RDF terms. \cite{Cyganiak.2014} 
+So it's clear how RDF data is connected, but not yet clear what the components of an RDF triple are. So what are subjects, objects, and predicates? How can we use them? A resource can be mentioned both as a subject and an object in numerous triples, though not reflexively, e.g. \texttt{<Donald Trump> <loves> <Donald Trump> .} is not allowed.  Subjects, predicates, and objects can be IRIs (Internationalized Resource Identifiers), whereas subjects and objects may be \textit{blank} nodes (more about those in \ref{sec:blanknodes}). Objects may additionally be \textit{literals}, which are used for static values entailing strings, numbers, or dates. Blank nodes, IRIs, and literals are so-called RDF terms. \cite{Cyganiak.2014}
 
 RDF terms are unique and are not equivalent to each other. For example, the IRI \url{www.zombo.com} is not equivalent to the string literal value of \url{www.zombo.com}, and neither are equivalent to the blank node identifier \url{www.zombo.com} \cite{Cyganiak.2014}.  This is important to note when creating semantic data for a Thing, but in this work semantic data was provided, so it will not be explained in further detail.  \change{this sounds like a cop-out}
 
@@ -194,14 +196,14 @@ Compare figures \ref{fig:rdflut400} and \ref{fig:rdfxml}. The first line is like
 \end{figure}
 
 
- 
+
 Not all RDF graphs can be serialized using the RDF/XML standard, specially those that use the \textt{rdf:HTML} datatype, those that use reserved names as properties, or those that use property names, which cannot be transformed into XML namespace qualified names, e.g. because they contain characters that are not qualified for QName namespaces \cite{RDFXML.02.10.2017}. RDF/XML documents can be validated using a tool\footnote{https://www.w3.org/RDF/Validator/} provided by the W3C.
- 
- 
+
+
 \subsection{EXI}
 XML is a costly representation of RDF data and embedded devices often do not have the resources to store and process XML. As a result Semantic Web/Linked Data technologies have failed to gain wide-spread traction. To confront this problem researchers at the Siemens Corporate Technology created a solution based off the W3C EXI format. \cite{Kabisch.2015}
 
-The Efficient XML Interchange (EXI) format was formally recommended by the W3C in 2014, and helps to accelerate the exchange of XML data. EXI puts the responsibility of parsing on the server, to which parsing events are sent. It was intended to stream XML data in a without losing any information, unlike RDSZ (The RDF Differential Stream Compressor based on Zlib), with which the RDF structure is lost. This is especially useful when used together with microcontrollers \cite{Kabisch.2015} and when combined with the The Constrained Application Protocol (CoAP) \cite{castellani2011web}. 
+The Efficient XML Interchange (EXI) format was formally recommended by the W3C in 2014, and helps to accelerate the exchange of XML data. EXI puts the responsibility of parsing on the server, to which parsing events are sent. It was intended to stream XML data in a without losing any information, unlike RDSZ (The RDF Differential Stream Compressor based on Zlib), with which the RDF structure is lost. This is especially useful when used together with microcontrollers \cite{Kabisch.2015} and when combined with the The Constrained Application Protocol (CoAP) \cite{castellani2011web}.
 
 As defined in the W3C EXI recommendation, an \textit{EXI stream} "is an EXI header followed by an \textit{EXI body}", which "carries the content of the document, while the EXI header communicates the options used for encoding the EXI body" and is therefore necessary to decode the body. The EXI body is composed of so-called EXI events, which encode XML elements. Below is a list of the EXI events with their descriptions. \cite{.02.10.2017b}
 
@@ -211,7 +213,7 @@ As defined in the W3C EXI recommendation, an \textit{EXI stream} "is an EXI head
 \item \textbf{SD}: Starts the EXI stream with a \textbf{S}tart \textbf{D}ocument event.
 \item \textbf{NS}: Sets the \textbf{n}ame\textbf{s}pace of the document.
 \item \textbf{SE}: A \textbf{s}tart \textbf{e}lement event, which is used to start the element of an XML document.
-\item \textbf{AT}: The \textbf{at}tribute event denotes an attribute in XML. 
+\item \textbf{AT}: The \textbf{at}tribute event denotes an attribute in XML.
 \item \textbf{CH}: The \textbf{ch}aracter event denotes a literal.
 \item \textbf{EE}: An \textbf{e}nd \textbf{e}lement event, which follows an SE event. This ends the processing of the current element. This event does not refer to the element, like in XML.
 \item \textbf{ED}: Ends the document stream with a \textbf{E}nd \textbf{D}ocument event.
@@ -230,7 +232,7 @@ NS	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 NS	xmlns:wot="http://w3c.github.io/wot/wot.owl#"
 SE	rdf:Description
 AT	rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b1"
-SE	wot:hasProperty 
+SE	wot:hasProperty
 AT	rdf:nodeID="f8a04ac1a47924de7ad18c3b413895565b2"
 EE
 SE	rdf:type
@@ -311,7 +313,6 @@ With RDF semantic data can be represented, but that is nearly useless unless one
 
 
 The SPARQL  Protocol and RDF Query Language (SPARQL), pronounced "sparkle", is for querying semantic databases and manipulating RDF data. It was formally recommended by the W3C in 2008  \cite{Herman.2008} and has since been an integral part of the Semantic Web. Tim Berners Lee, the director of the W3C and founder of the Web once said, "Trying to use the Semantic Web without SPARQL is like trying to use a relational database without SQL." \cite{Herman.2008} SPARQL offers tools for querying and analyzing triple patterns and has a similar syntax to SQL. The result of a SPARQL query may be an RDF graph or a result set.
-\change{include a sample query of the LUT400, esp one containing blank Nodes}
 
 Again, consider the LUT400. Below is a sample query on the LUT400's data, which selects all triples with the predicate \texttt{wot:hasProperty}.
 
@@ -324,21 +325,15 @@ WHERE {
 }
 \end{lstlisting}
 
-SPARQL Queries can also be used to compare quantities. Suppose there were two LUT400s built into the FESTO unit, labeled by the simple IDs \texttt{1} and \texttt{2}. The \textt{ASK} command returns either \texttt{TRUE} or \texttt{FALSE} if the query has any matching patterns. The query is formed by asking the web resource of the tank about the property of the water level, and these two results from each web resource is compared.
+SPARQL Queries can also be used to compare quantities. Suppose there were two LUT400s built into the FESTO unit, labeled by the simple IDs \texttt{1} and \texttt{2}. The \textt{ASK} command returns either \texttt{TRUE} or \texttt{FALSE} if the query has any matching patterns. The query is formed by asking the web resource of the tank about the property of the water level, and these two results from each web resource is compared. \cite{.02Oct17}
 
 \begin{lstlisting}[
     basicstyle=\small, caption={Comparing Volume using a SPARQL query}, label={lst:ASKQueryLUT400}]
 PREFIX wot: <http://w3c.github.io/wot/wot.owl#>
-ASK { 
+ASK {
     <http://example.com/waterlevelsensorID/1> ?wot:hasInteraction ?levelValue1
     <http://example.com/waterlevelsensorID/2> ?wot:hasInteraction ?levelValue2
     FILTER (?levelValue1 > ?levelValue2) .
 }
 
 \end{lstlisting}
-
-
-\cite{.02Oct17}
-
-
-\change{Allude and Cite Florian Bieringer, his work was important for you!}
